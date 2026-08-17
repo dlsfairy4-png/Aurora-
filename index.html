@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Aurora — uma interface de streaming de música feita com HTML, CSS e JavaScript."
+    />
+    <title>Aurora — sua música, do seu jeito</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23c9ff4f'/%3E%3Cpath d='M18 27c10-4 20-3 29 1M20 34c9-3 18-2 25 1M22 41c7-2 13-1 19 1' fill='none' stroke='%23111' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <a class="brand" href="#" aria-label="Página inicial Aurora">
+          <span class="brand-mark">
+            <i></i><i></i><i></i>
+          </span>
+          <span>Aurora</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Navegação principal">
+          <button class="nav-item active" data-view="home">
+            <span class="nav-icon">⌂</span>
+            Início
+          </button>
+          <button class="nav-item" data-view="search">
+            <span class="nav-icon">⌕</span>
+            Buscar
+          </button>
+          <button class="nav-item" data-view="library">
+            <span class="nav-icon">▥</span>
+            Sua biblioteca
+          </button>
+        </nav>
+
+        <div class="sidebar-section">
+          <div class="section-heading">
+            <span>Suas playlists</span>
+            <button class="icon-button" id="newPlaylistBtn" aria-label="Criar playlist">＋</button>
+          </div>
+          <button class="playlist-link active">Descobertas da semana</button>
+          <button class="playlist-link">Foco total</button>
+          <button class="playlist-link">Noite neon</button>
+          <button class="playlist-link">Domingo leve</button>
+          <button class="playlist-link">Favoritas</button>
+        </div>
+
+        <div class="sidebar-promo">
+          <span class="promo-orbit"></span>
+          <p>Ouça sem limites</p>
+          <small>Seu universo musical começa aqui.</small>
+          <button id="exploreBtn">Explorar</button>
+        </div>
+      </aside>
+
+      <main class="content">
+        <header class="topbar">
+          <div class="topbar-left">
+            <button class="menu-button" id="menuButton" aria-label="Abrir menu">☰</button>
+            <div class="history-buttons" aria-label="Histórico">
+              <button aria-label="Voltar">‹</button>
+              <button aria-label="Avançar">›</button>
+            </div>
+            <label class="search-box">
+              <span>⌕</span>
+              <input id="searchInput" type="search" placeholder="O que você quer ouvir?" />
+              <kbd>⌘ K</kbd>
+            </label>
+          </div>
+          <div class="profile-area">
+            <button class="notification-button" aria-label="Notificações">
+              ♢<span></span>
+            </button>
+            <button class="profile-button">
+              <span class="avatar">LS</span>
+              <span class="profile-name">Olá, Lucas</span>
+              <span>⌄</span>
+            </button>
+          </div>
+        </header>
+
+        <div class="page">
+          <section class="hero">
+            <div class="hero-copy">
+              <span class="eyebrow">FEITO PARA VOCÊ</span>
+              <h1>Som para o seu<br /><em>momento.</em></h1>
+              <p>
+                Uma seleção que acompanha o seu ritmo, da primeira ideia
+                à última luz do dia.
+              </p>
+              <div class="hero-actions">
+                <button class="primary-button" id="heroPlayButton">
+                  <span>▶</span> Ouvir agora
+                </button>
+                <button class="secondary-button" id="heroSaveButton">
+                  ♡ Salvar playlist
+                </button>
+              </div>
+            </div>
+            <div class="hero-art" aria-label="Arte abstrata da playlist">
+              <span class="orb orb-one"></span>
+              <span class="orb orb-two"></span>
+              <div class="vinyl">
+                <span class="vinyl-groove"></span>
+                <span class="vinyl-label">A</span>
+              </div>
+              <div class="floating-note note-one">♪</div>
+              <div class="floating-note note-two">♫</div>
+              <div class="hero-stamp">MIX<br />07</div>
+            </div>
+          </section>
+
+          <section class="section-block">
+            <div class="title-row">
+              <div>
+                <span class="eyebrow">CONTINUE OUVINDO</span>
+                <h2>De volta ao seu ritmo</h2>
+              </div>
+              <button class="text-button" data-action="show-all">Ver tudo <span>→</span></button>
+            </div>
+            <div class="album-grid" id="albumGrid"></div>
+          </section>
+
+          <section class="section-block chart-section">
+            <div class="title-row">
+              <div>
+                <span class="eyebrow">EM ALTA AGORA</span>
+                <h2>Mais tocadas hoje</h2>
+              </div>
+              <div class="filter-pills">
+                <button class="active" data-filter="all">Todas</button>
+                <button data-filter="pop">Pop</button>
+                <button data-filter="electronic">Eletrônica</button>
+                <button data-filter="indie">Indie</button>
+              </div>
+            </div>
+            <div class="track-list" id="trackList"></div>
+          </section>
+        </div>
+      </main>
+
+      <footer class="player" id="player">
+        <div class="now-playing">
+          <div class="mini-cover cover-aurora" id="playerCover">
+            <span>AU</span>
+          </div>
+          <div class="track-meta">
+            <strong id="playerTitle">Luzes da Cidade</strong>
+            <span id="playerArtist">Nina Vale</span>
+          </div>
+          <button class="like-button" id="likeButton" aria-label="Curtir música">♡</button>
+        </div>
+
+        <div class="player-center">
+          <div class="player-controls">
+            <button id="shuffleButton" aria-label="Embaralhar">⌘</button>
+            <button id="previousButton" aria-label="Anterior">|‹</button>
+            <button class="main-play" id="mainPlayButton" aria-label="Reproduzir">▶</button>
+            <button id="nextButton" aria-label="Próxima">›|</button>
+            <button id="repeatButton" aria-label="Repetir">↻</button>
+          </div>
+          <div class="progress-row">
+            <span id="currentTime">0:00</span>
+            <button class="progress-track" id="progressTrack" aria-label="Progresso da música">
+              <span id="progressFill"></span>
+              <i id="progressThumb"></i>
+            </button>
+            <span id="duration">3:42</span>
+          </div>
+        </div>
+
+        <div class="player-extras">
+          <button aria-label="Fila de reprodução">☷</button>
+          <button aria-label="Dispositivo">▣</button>
+          <span>♩</span>
+          <input id="volumeSlider" type="range" min="0" max="100" value="72" aria-label="Volume" />
+          <button class="expand-button" aria-label="Tela cheia">⛶</button>
+        </div>
+      </footer>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <div class="modal-backdrop" id="playlistModal" aria-hidden="true">
+      <form class="modal-card" id="playlistForm">
+        <button class="modal-close" type="button" id="closeModal" aria-label="Fechar">×</button>
+        <span class="eyebrow">NOVA COLEÇÃO</span>
+        <h2>Crie sua playlist</h2>
+        <p>Dê um nome para o seu próximo universo musical.</p>
+        <label>
+          Nome da playlist
+          <input id="playlistName" type="text" placeholder="Ex.: Viagem de verão" maxlength="35" required />
+        </label>
+        <button class="primary-button" type="submit">Criar playlist</button>
+      </form>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
