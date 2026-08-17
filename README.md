@@ -1,2 +1,3 @@
-# MovieHub
-Catálogo de filmes desenvolvido com HTML, CSS, JavaScript e interação com API. 
+# Aurora 
+Plataforma web de músicas desenvolvida com HTML, CSS e JavaScript, com interface responsiva, catálogo musical e recursos interativos inspirados em serviços de streaming.
+
